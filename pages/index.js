@@ -232,7 +232,10 @@ export async function getServerSideProps(context) {
   // db.find({}) or any of the MongoDB Node Driver commands
 
   const isConnected = await client.isConnected()
-
+  let projects = await client.db()
+  .collection('project')
+  .find({}).toArray();
+  console.log("db working projects found ", projects)
   return {
     props: { isConnected },
   }
